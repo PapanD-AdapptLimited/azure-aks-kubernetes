@@ -28,7 +28,7 @@ metadata:
   labels:
     app: app1-nginx
 spec:
-  type: ClusterIp # LoadBalancer # ClusterIp, # NodePort
+  # type: ClusterIp # LoadBalancer # ClusterIp, # NodePort
   selector:
     app: app1-nginx
   ports: 
