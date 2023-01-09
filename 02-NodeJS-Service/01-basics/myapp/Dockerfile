@@ -25,5 +25,5 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
-# CMD ["node", "dist/apps/orders/main"]
-CMD ["npm", "start"]
+CMD ["node", "-r", "module-alias/register", "./dist", "--env=production"]
+# CMD ["npm", "start"]
