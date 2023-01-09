@@ -1,33 +1,55 @@
 apiVersion: apps/v1
 kind: Deployment 
 metadata: #Dictionary
-  name: myapp3-deployment
+  name: app1-nginx-deployment
+  labels:
+    app: app1-nginx
 spec: # Dictionary
   replicas: 1
   selector:
     matchLabels:
-      app: myapp3
+      app: app1-nginx
   template:  
     metadata: # Dictionary
-      name: myapp3-pod
+      name: app1-nginx-pod
       labels: # Dictionary
-        app: myapp3  # Key value paids
+        app: app1-nginx  # Key value paids
     spec:
       containers: # List
-        - name: myapp3-container
-          image: paulbouwer/hello-kubernetes:1.8
+        - name: app1-nginx
+          image: nginx:1.14.2 # paulbouwer/hello-kubernetes:1.8
           ports: 
-            - containerPort: 8080
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service 
 metadata:
-  name: deployment-loadbalancer-service
+  name: app1-nginx-clusterip-service
+  labels:
+    app: app1-nginx
 spec:
-  #type: LoadBalancer # ClusterIp, # NodePort
+  type: ClusterIp # LoadBalancer # ClusterIp, # NodePort
   selector:
-    app: myapp3
+    app: app1-nginx
   ports: 
     - name: http
-      port: 8080 # Service Port
-      targetPort: 8080 # Container Port
+      port: 80 # Service Port
+      targetPort: 80 # Container Port
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginxapp1-ingress-service
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app1-nginx-clusterip-service
+                port:
+                  number: 80
