@@ -5,7 +5,7 @@ metadata: #Dictionary
   labels:
     app: nodejs-app
 spec: # Dictionary
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: nodejs-app
