@@ -29,5 +29,5 @@ spec:
     app: myapp3
   ports: 
     - name: http
-      port: 8080 # Service Port
+      port: 80 # Service Port
       targetPort: 80 # Container Port
