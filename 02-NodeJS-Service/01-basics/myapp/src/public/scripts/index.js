@@ -3,6 +3,7 @@
  ******************************************************************************/
 
 displayUsers();
+displayInformation();
 
 
 function displayUsers() {
@@ -18,6 +19,24 @@ function displayUsers() {
                 allUsersAnchor.innerHTML += getUserDisplayEle(user);
             });
         });
+
+    // all-k8s-info-anchor
+};
+
+function displayInformation() {
+    httpGet('/api/users/info')
+        .then(response => response.json())
+        .then((response) => {
+            var hostname = response.hostname;
+            console.log
+            // Empty the anchor
+            var allInfoAnchor = document.getElementById('all-k8s-info-anchor');
+            allInfoAnchor.innerHTML = '';
+            // Append users to anchor
+            allInfoAnchor.innerHTML += `${hostname}`;
+        });
+
+    // 
 };
 
 

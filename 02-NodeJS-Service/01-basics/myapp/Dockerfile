@@ -25,5 +25,7 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
+EXPOSE 8081
+
 CMD ["node", "-r", "module-alias/register", "./dist", "--env=production"]
 # CMD ["npm", "start"]

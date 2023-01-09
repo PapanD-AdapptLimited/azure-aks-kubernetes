@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 
 import userService from '@services/user-service';
 import { ParamMissingError } from '@shared/errors';
-
+import os from 'os';
 
 
 // Constants
@@ -16,8 +16,16 @@ export const p = {
     add: '/add',
     update: '/update',
     delete: '/delete/:id',
+    k8sinfo: '/info',
 } as const;
 
+/**
+ * Get k8s info.
+ */
+router.get(p.k8sinfo, async (_: Request, res: Response) => {
+    const hostname = os.hostname()
+    return res.status(OK).json({hostname});
+});
 
 
 /**
