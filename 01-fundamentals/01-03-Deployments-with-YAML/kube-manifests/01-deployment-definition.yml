@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: #Dictionary
+  name: myapp3-deployment
+spec: # Dictionary
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp3
+  template:  
+    metadata: # Dictionary
+      name: myapp3-pod
+      labels: # Dictionary
+        app: myapp3  # Key value paids
+    spec:
+      containers: # List
+        - name: myapp3-container
+          image: nginx:1.14.2
+          ports: 
+            - containerPort: 80  
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: deployment-loadbalancer-service
+spec:
+  type: LoadBalancer # ClusterIp, # NodePort
+  selector:
+    app: myapp3
+  ports: 
+    - name: http
+      port: 8080 # Service Port
+      targetPort: 80 # Container Port
