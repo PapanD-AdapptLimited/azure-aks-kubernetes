@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: #Dictionary
+  name: nodejs-app-deployment
+  labels:
+    app: nodejs-app
+spec: # Dictionary
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-app
+  template:  
+    metadata: # Dictionary
+      name: nodejs-app-pod
+      labels: # Dictionary
+        app: nodejs-app  # Key value paids
+    spec:
+      containers: # List
+        - name: nodejs-app
+          image: papanadappt/my-node-app:latest
+          ports: 
+            - containerPort: 8081
