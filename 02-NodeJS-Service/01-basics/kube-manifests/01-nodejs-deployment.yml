@@ -18,5 +18,6 @@ spec: # Dictionary
       containers: # List
         - name: nodejs-app
           image: papanadappt/my-node-app:latest
+          command: ["npm", "start"]
           ports: 
             - containerPort: 8081
