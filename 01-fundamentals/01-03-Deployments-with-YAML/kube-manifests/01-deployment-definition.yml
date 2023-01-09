@@ -5,7 +5,7 @@ metadata: #Dictionary
   labels:
     app: app1-nginx
 spec: # Dictionary
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: app1-nginx
