@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_ROOT_HOST="%"
+      - MYSQL_ROOT_PASSWORD=dbpassword11
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpass
+      - MYSQL_DATABASE=webappdb
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysqldb_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    labels:
+      service: hyperledger-fabric
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysqldb
+      - MYSQL_ROOT_PASSWORD=dbpassword11
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpass
+    links:
+      - mysqldb
+    depends_on:
+      - mysqldb
+    ports:
+      - 4080:80
+
+volumes:
+  mysqldb_data:
+    driver: local
