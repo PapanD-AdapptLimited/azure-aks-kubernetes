@@ -22,9 +22,6 @@ const app = express();
  **********************************************************************************/
 
 // Common middlewares
-app.use(cors({
-  origin: '*'
-}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -36,13 +33,24 @@ if (process.env.NODE_ENV === 'development') {
 
 // Security (helmet recommended in express docs)
 if (process.env.NODE_ENV === 'production') {
-    app.use(helmet());
+    app.use(cors({origin: '*'}));
+    app.use(helmet({ crossOriginOpenerPolicy: true }));
 }
 
 
 /***********************************************************************************
  *                         API routes and error handling
  **********************************************************************************/
+
+// Inbound Logging
+app.use((req:Request, res:Response, next:NextFunction) => {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
+    logger.info(`${ip} ${req.method} ${req.url}`);
+    if (req.method == 'POST' || req.method == 'PUT') {
+        logger.info(`[Body-Payload] ${JSON.stringify(req.body)}`);
+    }
+    next();
+});
 
 // Add api router
 app.use('/api', apiRouter);
