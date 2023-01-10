@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: nodejs-app-clusterip-service
+  labels:
+    app: nodejs-app
+spec:
+  # type: ClusterIp # LoadBalancer # ClusterIp, # NodePort
+  selector:
+    app: nodejs-app
+  ports: 
+    - name: http
+      port: 80 # Service Port
+      targetPort: 8081 # Container Port
