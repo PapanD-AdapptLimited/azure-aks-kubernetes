@@ -16,14 +16,16 @@ kubectl cluster-info --context kind-nodejs
 kind delete cluster
 
 
-export TAG=latest
+
 docker rmi -f $(docker images papanadappt/my-node-app -q)
-docker build -t papanadappt/my-node-app:${TAG} . # --platform=linux/amd64 
+export TAG=0.1.0
+docker build --platform=linux/amd64 -t papanadappt/my-node-app:${TAG} .
+docker push papanadappt/my-node-app:${TAG}
 
 docker run -d -p 8081:8081 --name myapp papanadappt/my-node-app:${TAG}
 docker rm -f myapp
 
-docker push papanadappt/my-node-app:${TAG}
+
 
 
 
