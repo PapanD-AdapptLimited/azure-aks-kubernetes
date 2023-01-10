@@ -1,6 +1,17 @@
 import userRepo from '@repos/user-repo';
 import { IUser } from '@models/user-model';
 import { UserNotFoundError } from '@shared/errors';
+import mysql, { MysqlError, PoolConnection, queryCallback } from 'mysql';
+import logger from 'jet-logger';
+
+var pool = mysql.createPool({
+    host: process.env.DB_HOSTNAME,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    connectionLimit: 10, // max number of connection
+    multipleStatements: true
+});
 
 
 
@@ -21,6 +32,22 @@ function getAll(): Promise<IUser[]> {
  * @returns 
  */
 function addOne(user: IUser): Promise<void> {
+    pool.getConnection((err:MysqlError, conn:PoolConnection)=>{
+        if(err){
+            logger.err(err);
+            throw err;
+        }
+        logger.info("<DB-CONN-SUCCESS>");
+        const sqlQuery = `INSERT INTO users (name, email)
+            VALUES('${user.name}', '${user.email}')`; 
+        conn.query(sqlQuery, function(err:any, rows:any){
+            if(err){
+                logger.err(err)
+            }
+            console.log(rows)
+        })
+        conn.release()
+    })
     return userRepo.add(user);
 }
 

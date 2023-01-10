@@ -75,6 +75,7 @@
     "jsonfile": "^6.1.0",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "npm": "^9.2.0"
   },
   "devDependencies": {
@@ -87,6 +88,7 @@
     "@types/jasmine": "^4.3.1",
     "@types/jsonfile": "^6.1.1",
     "@types/morgan": "^1.9.4",
+    "@types/mysql": "^2.15.21",
     "@types/node": "^18.11.18",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
