@@ -17,7 +17,7 @@ spec: # Dictionary
     spec:
       containers: # List
         - name: nodejs-app
-          image: papanadappt/my-node-app:0.1.0
+          image: papanadappt/my-node-app:0.1.0-secret
           imagePullPolicy: Always
           ports: 
             - containerPort: 8081
@@ -31,4 +31,7 @@ spec: # Dictionary
             - name: DB_USERNAME
               value: "root"            
             - name: DB_PASSWORD
-              value: "dbpassword11"
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-db-password
+                  key: db-password
