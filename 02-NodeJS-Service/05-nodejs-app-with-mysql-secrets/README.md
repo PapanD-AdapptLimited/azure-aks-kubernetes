@@ -39,3 +39,10 @@ exit;
 
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'172.27.0.1' WITH GRANT OPTION;
+
+
+
+
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -u root -pdbpassword11
+
+
