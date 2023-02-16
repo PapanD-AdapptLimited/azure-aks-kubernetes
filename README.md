@@ -18,7 +18,7 @@ kind delete cluster
 
 
 docker rmi -f $(docker images papanadappt/my-node-app -q)
-export TAG=0.1.0-secret
+export TAG=0.1.1-secret
 docker build --platform=linux/amd64 -t papanadappt/my-node-app:${TAG} .
 docker push papanadappt/my-node-app:${TAG}
 
