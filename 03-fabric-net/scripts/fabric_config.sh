@@ -24,8 +24,9 @@ function delete_namespace() {
 }
 
 function init_storage_class() {
-
+  push_fn "Create Storage Class"
   kubectl create -f kube/storage-class.yaml
+  pop_fn
   
 }
 
