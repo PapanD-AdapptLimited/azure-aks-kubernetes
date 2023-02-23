@@ -30,6 +30,13 @@ function init_storage_class() {
   
 }
 
+function delete_storage_class() {
+  push_fn "Delete Storage Class"
+  kubectl delete -f kube/storage-class.yaml
+  pop_fn
+  
+}
+
 function init_storage_volumes() {
   push_fn "Provisioning volume storage"
 

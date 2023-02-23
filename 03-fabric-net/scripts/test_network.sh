@@ -128,7 +128,7 @@ function create_local_MSP() {
 function network_up() {
 
   # Kube config
-  # init_namespace
+  init_namespace
   init_storage_class
   init_storage_volumes
   load_org_config
@@ -199,6 +199,7 @@ function network_down() {
   stop_services
   scrub_org_volumes
 
+  delete_storage_class
   delete_namespace
 
   rm -rf $PWD/build
