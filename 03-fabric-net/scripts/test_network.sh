@@ -129,6 +129,7 @@ function network_up() {
 
   # Kube config
   init_namespace
+  init_storage_class
   init_storage_volumes
   load_org_config
 

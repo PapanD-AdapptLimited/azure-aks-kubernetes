@@ -23,6 +23,12 @@ function delete_namespace() {
   done
 }
 
+function init_storage_class() {
+
+  kubectl create -f kube/storage-class.yaml
+  
+}
+
 function init_storage_volumes() {
   push_fn "Provisioning volume storage"
 
@@ -36,7 +42,7 @@ function init_storage_volumes() {
 
   elif [ "${CLUSTER_RUNTIME}" == "az" ]; then
     export STORAGE_CLASS="managed-premium-retain-sc"
-    
+
   else
     echo "Unknown CLUSTER_RUNTIME ${CLUSTER_RUNTIME}"
     exit 1
