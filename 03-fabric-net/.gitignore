@@ -1,4 +1,8 @@
+.txt
+.bak
+
 bin
+build
 builders
 config
 docs
