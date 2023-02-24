@@ -48,7 +48,7 @@ function init_storage_volumes() {
   elif [ "${CLUSTER_RUNTIME}" == "k3s" ]; then
     export STORAGE_CLASS="local-path"
 
-  elif [ "${CLUSTER_RUNTIME}" == "az" ]; then
+  elif [ "${CLUSTER_RUNTIME}" == "cloud" ]; then
     export STORAGE_CLASS="managed-premium-retain-sc"
 
   else

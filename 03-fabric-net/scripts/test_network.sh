@@ -130,7 +130,7 @@ function network_up() {
   # Kube config
   init_namespace
   init_storage_class
-  init_storage_volumes
+  init_storage_volumes # fabric_config.sh
   load_org_config
 
   # Service account permissions for the k8s builder
