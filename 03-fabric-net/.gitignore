@@ -1,7 +1,9 @@
-.txt
-.bak
+*.log
+*.txt
+*.bak
 
 bin
 build
 builders
 docs
+

@@ -31,7 +31,7 @@ function context() {
 context FABRIC_VERSION                2.4
 context FABRIC_CA_VERSION             1.5
 
-context CLUSTER_RUNTIME               az                    # or k3s for Rancher or aws or az
+context CLUSTER_RUNTIME               cloud                    # or k3s for Rancher or aws | cloud for az
 context CONTAINER_CLI                 docker                # or nerdctl for containerd
 context CONTAINER_NAMESPACE           ""                    # or "--namespace k8s.io" for containerd / nerdctl
 

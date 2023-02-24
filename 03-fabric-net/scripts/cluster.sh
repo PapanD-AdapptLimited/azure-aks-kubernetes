@@ -109,7 +109,8 @@ function apply_cert_manager() {
   push_fn "Launching cert-manager"
 
   # Install cert-manager to manage TLS certificates
-  kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
+  # kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
+  kubectl apply -f kube/cert-manager.yaml
 
   pop_fn
 }
@@ -118,7 +119,8 @@ function delete_cert_manager() {
   push_fn "Deleting cert-manager"
 
   # Install cert-manager to manage TLS certificates
-  curl https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml | kubectl delete -f -
+  # curl https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml | kubectl delete -f -
+  kubectl delete -f kube/cert-manager.yaml
 
   pop_fn
 }
