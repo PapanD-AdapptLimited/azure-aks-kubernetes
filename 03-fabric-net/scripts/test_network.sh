@@ -128,8 +128,8 @@ function create_local_MSP() {
 function network_up() {
 
   # Kube config
-  init_namespace
-  init_storage_class
+  # init_namespace
+  # init_storage_class
   init_storage_volumes # fabric_config.sh
   load_org_config
 
