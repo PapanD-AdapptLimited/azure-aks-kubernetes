@@ -322,6 +322,7 @@ csr:
     - 127.0.0.1
     - org0-ca
     - org0-ca.${NS}.svc.cluster.local
+    - org0-ca.${DOMAIN}
   ca:
     expiry: 131400h
     pathlength: 1
