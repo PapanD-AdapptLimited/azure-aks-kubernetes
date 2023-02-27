@@ -135,7 +135,7 @@ function network_up() {
 
   # Service account permissions for the k8s builder
   if [ "${CHAINCODE_BUILDER}" == "k8s" ]; then
-    apply_k8s_builder_roles
+    apply_k8s_builder_roles # fabric_config.sh
     apply_k8s_builders
   fi
 
@@ -147,10 +147,10 @@ function network_up() {
   enroll_bootstrap_ECert_CA_users
 
   # Test Network
-  create_local_MSP
+  # create_local_MSP
 
-  launch_orderers
-  launch_peers
+  # launch_orderers
+  # launch_peers
 }
 
 function stop_services() {
