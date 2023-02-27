@@ -1,0 +1,57 @@
+{
+	"name": "first-network",
+	"version": "1.1",
+	"channels": {
+		"mainchannel": {
+            "orderers": [
+                "orderer0"
+            ],
+			"peers": [
+				"peer0-ibm"
+            ],
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					}
+				}
+			}
+		}
+	},
+	"organizations": {
+		"ibm": {
+			"mspid": "ibm",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/ibm/users/Admin@ibm/msp/keystore/pvt-cert.pem"
+			},
+			"peers": ["peer0-ibm"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/ibm/users/Admin@ibm/msp/signcerts/Admin@ibm-cert.pem"
+			}
+		}
+    },
+    "orderers": {
+        "orderer0": {
+            "url": "grpcs://orderer0-service:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer0"
+            },
+            "tlsCACerts": {
+                "path": "/tmp/crypto/ordererOrganizations/orderer/orderers/orderer0/msp/tlscacerts/tlsca.orderer-cert.pem"
+            }
+        }
+    },
+	"peers": {
+		"peer0-ibm": {
+			"url": "grpcs://peer0-ibm-service:7051",
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/ibm/peers/peer0-ibm/tls/ca.crt"
+			},
+            "grpcOptions": {
+              "ssl-target-name-override": "peer0-ibm"
+            }
+		}
+	}
+}
