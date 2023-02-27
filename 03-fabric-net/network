@@ -44,7 +44,7 @@ context NS                            ${KUBE_NAMESPACE}
 context ORG0_NS                       ${NS}
 context ORG1_NS                       ${NS}
 context ORG2_NS                       ${NS}
-context DOMAIN                        localho.st            # 20.185.11.239 #
+context DOMAIN                        9e7aca66efed400a8ee3.eastus.aksapp.io           # 20.185.11.239 #
 context CHANNEL_NAME                  mychannel
 context ORDERER_TIMEOUT               10s                   # see https://github.com/hyperledger/fabric/issues/3372
 context TEMP_DIR                      ${PWD}/build
