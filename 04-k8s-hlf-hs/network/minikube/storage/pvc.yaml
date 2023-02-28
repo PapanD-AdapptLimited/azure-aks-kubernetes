@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  # storageClassName: standard 
+  storageClassName: managed-premium-retain-sc
   resources:
     requests:
       storage: 2Gi
