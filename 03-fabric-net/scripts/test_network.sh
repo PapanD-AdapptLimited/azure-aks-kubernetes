@@ -197,6 +197,7 @@ function network_down() {
   set -e
 
   stop_services
+  sleep 30
   scrub_org_volumes
 
   delete_storage_class
