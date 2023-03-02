@@ -13,4 +13,4 @@ mountOptions:
   - cache=strict
   - actimeo=30
 parameters:
-  skuName: Premium_LRS
+  skuName: Standard_LRS
