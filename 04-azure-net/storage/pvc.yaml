@@ -3,11 +3,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: my-pv-claim
 spec:
-  storageClassName: my-azurefile-sc
+  storageClassName: my-azurefile-sc # azuredisk-csi-premium-zrs
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 100Gi  
+  volumeMode: Block
 
 
