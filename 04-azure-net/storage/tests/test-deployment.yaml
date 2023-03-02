@@ -24,7 +24,7 @@ spec:
             path: /var/run
       containers:
         - name: example1
-          image: amd64/ubuntu:latest # arm64v8/ubuntu:latest
+          image: ubuntu:latest
           command: ["sleep"]
           args: ["infinity"]
           volumeMounts:
