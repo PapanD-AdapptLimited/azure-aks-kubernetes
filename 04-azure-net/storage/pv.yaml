@@ -1,22 +1,27 @@
+
+spec:
+  storageClassName: my-azurefile-sc
+  
+  volumeMode: Filesystem
+
+--- 
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: efs-burst-persistent-volume
 spec:
-  storageClassName: my-azurefile-sc
   capacity:
-    storage: 100Gi
-  volumeMode: Filesystem
+    storage: 5Gi
   accessModes:
     - ReadWriteMany
+  azureFile:
+    secretName: azure-secret
+    shareName: nfs3share
+    readOnly: false
   mountOptions:
     - dir_mode=0777
     - file_mode=0777
-    - uid=0
-    - gid=0
+    - uid=1000
+    - gid=1000
     - mfsymlinks
-    - cache=strict
-    - actimeo=30
-  nfs:
-    path: /
-    server: fs-0836fad6283056f42.efs.ap-south-1.amazonaws.com
+    - nobrl
