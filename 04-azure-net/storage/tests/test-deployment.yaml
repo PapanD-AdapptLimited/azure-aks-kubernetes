@@ -17,8 +17,12 @@ spec:
     spec:
       volumes:
         - name: my-pv-storage
-          persistentVolumeClaim:
-            claimName: my-pv-claim
+          azureFile:
+            secretName: azure-secret
+            shareName: nfs3share
+            readOnly: false
+          #persistentVolumeClaim:
+          #  claimName: my-pv-claim
         - name: host
           hostPath:
             path: /var/run
