@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: efs-burst-persistent-volume
+  name: nfs
 spec:
   capacity:
     storage: 100Gi
   accessModes:
     - ReadWriteMany
   nfs:
-    path: "fca53bc43807c44379d142c/hlf-file-share"
-    server: fca53bc43807c44379d142c.file.core.windows.net
+    path: "/mount/fca53bc43807c44379d142c/hlf-file-share"
+    server: fca53bc43807c44379d142c.file.core.windows.net:/fca53bc43807c44379d142c/hlf-file-share
   # azureFile:
   #   secretName: azure-secret
   #   shareName: hlf-file-share # fca53bc43807c44379d142c # nfs3share
