@@ -4,7 +4,7 @@ metadata:
   name: efs-burst-persistent-volume
 spec:
   capacity:
-    storage: 5Gi
+    storage: 100Gi
   accessModes:
     - ReadWriteMany
   azureFile:
