@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   azureFile:
     secretName: azure-secret
-    shareName: fca53bc43807c44379d142c # nfs3share
+    shareName: hlf-file-share # fca53bc43807c44379d142c # nfs3share
     readOnly: false
   mountOptions:
     - dir_mode=0777
