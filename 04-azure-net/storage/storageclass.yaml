@@ -17,3 +17,4 @@ mountOptions:
 parameters:
   skuName: Premium_LRS # Standard_LRS
   shareName: hlf-file-share
+  protocol: nfs
