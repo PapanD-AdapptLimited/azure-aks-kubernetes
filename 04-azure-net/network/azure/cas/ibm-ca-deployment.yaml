@@ -25,7 +25,7 @@ spec:
       containers:
         - name: ibm-ca
           image: hyperledger/fabric-ca:1.5.3
-          command: ["sh"]
+          command: ["bash"]
           args: ["/scripts/start-root-ca.sh"]
           ports:
             - containerPort: 7054
