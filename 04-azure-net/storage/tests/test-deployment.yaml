@@ -19,7 +19,7 @@ spec:
         - name: my-pv-storage
           azureFile:
             secretName: azure-secret
-            shareName: nfs3share
+            shareName: fca53bc43807c44379d142c
             readOnly: false
           #persistentVolumeClaim:
           #  claimName: my-pv-claim
