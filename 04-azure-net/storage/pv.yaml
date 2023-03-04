@@ -2,13 +2,15 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs
+  labels:
+    type: nfs
 spec:
   capacity:
     storage: 100Gi
   accessModes:
     - ReadWriteMany
   nfs:
-    path: "fca53bc43807c44379d142c/hlf-file-share"
+    path: "/mount/fca53bc43807c44379d142c/hlf-file-share"
     server: fca53bc43807c44379d142c.file.core.windows.net # :/fca53bc43807c44379d142c/1hlf-file-share
   # azureFile:
   #   secretName: azure-secret
