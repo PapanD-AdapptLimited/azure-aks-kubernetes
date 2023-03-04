@@ -7,14 +7,15 @@ spec:
     storage: 100Gi
   accessModes:
     - ReadWriteMany
-  azureFile:
-    secretName: azure-secret
-    shareName: hlf-file-share # fca53bc43807c44379d142c # nfs3share
-    readOnly: false
+  nfs:
+    path: "f4b8a5c4ed6ad495aa41372/hlf-file-share"
+    server: f4b8a5c4ed6ad495aa41372.file.core.windows.net
+  # azureFile:
+  #   secretName: azure-secret
+  #   shareName: hlf-file-share # fca53bc43807c44379d142c # nfs3share
+  #   readOnly: false
   mountOptions:
-    - dir_mode=0777
-    - file_mode=0777
-    - uid=1000
-    - gid=1000
-    - mfsymlinks
-    - nobrl
+    - nolock
+    - vers=3
+    - sec=sys
+    - proto=tcp

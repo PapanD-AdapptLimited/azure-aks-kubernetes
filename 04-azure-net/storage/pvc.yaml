@@ -5,10 +5,10 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: my-azurefile-sc
+  storageClassName: "" # my-azurefile-sc
   resources:
     requests:
-      storage: 100Gi
+      storage: 10Gi
 # ---
 # apiVersion: v1
 # kind: PersistentVolumeClaim
