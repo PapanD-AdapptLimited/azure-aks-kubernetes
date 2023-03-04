@@ -8,14 +8,15 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    path: "f4b8a5c4ed6ad495aa41372/hlf-file-share"
-    server: f4b8a5c4ed6ad495aa41372.file.core.windows.net
+    path: "fca53bc43807c44379d142c/hlf-file-share"
+    server: fca53bc43807c44379d142c.file.core.windows.net
   # azureFile:
   #   secretName: azure-secret
   #   shareName: hlf-file-share # fca53bc43807c44379d142c # nfs3share
   #   readOnly: false
   mountOptions:
     - nolock
-    - vers=3
+    - vers=4
+    - minorversion=1
     - sec=sys
     - proto=tcp
