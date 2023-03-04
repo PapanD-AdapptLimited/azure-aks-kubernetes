@@ -17,12 +17,12 @@ spec:
     spec:
       volumes:
         - name: my-pv-storage
-          azureFile:
-            secretName: azure-secret
-            shareName: fca53bc43807c44379d142c
-            readOnly: false
-          #persistentVolumeClaim:
-          #  claimName: my-pv-claim
+          # azureFile:
+          #   secretName: azure-secret
+          #   shareName: fca53bc43807c44379d142c
+          #   readOnly: false
+          persistentVolumeClaim:
+            claimName: my-pv-claim
         - name: host
           hostPath:
             path: /var/run
