@@ -32,3 +32,11 @@ docker rm -f myapp
 
 
 --platform=linux/amd64
+
+
+
+fca53bc43807c44379d142c
+export AKS_PERS_STORAGE_ACCOUNT_NAME=fca53bc43807c44379d142c
+export STORAGE_KEY=FJuH5wc73t5C0uo/DNyZO2xTYV+tsavWQi/R2wZWF1lsajpaRb0lufkKlrNGisLMoL2MHBWn6MpS+AStKe1/cQ==
+
+kubectl -n test-storage create secret generic azure-secret --from-literal=azurestorageaccountname=$AKS_PERS_STORAGE_ACCOUNT_NAME --from-literal=azurestorageaccountkey=$STORAGE_KEY

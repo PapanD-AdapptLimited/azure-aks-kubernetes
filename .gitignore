@@ -1,5 +1,7 @@
 **/*.log
 **/*.bak
+**/*.txt
+*.txt
 *.log
 *.bak
 **/node_modules
