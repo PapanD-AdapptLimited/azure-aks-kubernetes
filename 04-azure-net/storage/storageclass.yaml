@@ -14,5 +14,5 @@ mountOptions:
   - actimeo=30
 parameters:
   skuName: Premium_LRS
-  # shareName: hlf-file-share
-  # protocol: nfs
+  shareName: hlf-file-share-2
+  protocol: nfs
