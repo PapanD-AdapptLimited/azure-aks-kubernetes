@@ -29,6 +29,13 @@ spec:
       containers:
         - name: example1
           image: ubuntu:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
           command: ["sleep"]
           args: ["infinity"]
           volumeMounts:
