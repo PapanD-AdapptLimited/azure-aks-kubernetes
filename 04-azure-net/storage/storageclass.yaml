@@ -4,8 +4,6 @@ metadata:
   name: my-azurefile-sc
 provisioner: file.csi.azure.com # replace with "kubernetes.io/azure-file" if aks version is less than 1.21
 allowVolumeExpansion: true
-#reclaimPolicy: Delete
-#volumeBindingMode: Immediate
 mountOptions:
   - dir_mode=0777
   - file_mode=0777
@@ -15,6 +13,6 @@ mountOptions:
   - cache=strict
   - actimeo=30
 parameters:
-  skuName: Premium_LRS # Standard_LRS
-  shareName: hlf-file-share
-  protocol: nfs
+  skuName: Premium_LRS
+  # shareName: hlf-file-share
+  # protocol: nfs
