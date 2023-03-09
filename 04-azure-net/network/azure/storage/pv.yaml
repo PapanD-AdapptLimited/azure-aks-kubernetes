@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: efs-burst-persistent-volume
 spec:
-  storageClassName: efs-sc
+  storageClassName: my-azurefile-sc
   capacity:
     storage: 100Gi
   volumeMode: Filesystem
