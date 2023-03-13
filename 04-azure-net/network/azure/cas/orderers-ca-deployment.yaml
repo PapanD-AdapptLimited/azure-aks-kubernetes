@@ -25,19 +25,19 @@ spec:
       containers:
         - name: orderers-ca
           image: hyperledger/fabric-ca:1.5.3
-          # command: ["sh"]
-          # args: ["/scripts/start-root-ca.sh"]
+          command: ["sh"]
+          args: ["/scripts/start-root-ca.sh"]
           ports:
             - containerPort: 7054
-          # env:
-          #   - name: FABRIC_CA_HOME
-          #     value: /etc/hyperledger/fabric-ca-server
-          #   - name: USERNAME
-          #     value: admin
-          #   - name: PASSWORD
-          #     value: adminpw
-          #   - name: CSR_HOSTS
-          #     value: orderers-ca
+          env:
+            - name: FABRIC_CA_HOME
+              value: /etc/hyperledger/fabric-ca-server
+            - name: USERNAME
+              value: admin
+            - name: PASSWORD
+              value: adminpw
+            - name: CSR_HOSTS
+              value: orderers-ca
           volumeMounts:
             - mountPath: /scripts
               name: my-pv-storage
