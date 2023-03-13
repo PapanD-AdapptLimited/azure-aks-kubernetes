@@ -9,4 +9,4 @@ spec:
   volumeName: state
   resources:
     requests:
-      storage: 100Gi
+      storage: 5Gi
