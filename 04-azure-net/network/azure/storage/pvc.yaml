@@ -6,7 +6,7 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: azurefile-csi
-  volumeName: azurefile
+  volumeName: statefile
   resources:
     requests:
-      storage: 5Gi
+      storage: 25Gi
