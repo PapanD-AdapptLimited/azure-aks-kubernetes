@@ -1,12 +1,30 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: state
+  name: statefile
 spec:
+  capacity:
+    storage: 25Gi
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: azurefile-csi
-  volumeName: state
-  resources:
-    requests:
-      storage: 5Gi
+  csi:
+    driver: file.csi.azure.com
+    readOnly: false
+    volumeHandle: unique-6666  # make sure this volumeid is unique for every identical share in the cluster
+    volumeAttributes:
+      resourceGroup: MC_adapptaks-rg_adapptaks_eastus  # optional, only set this when storage account is not in the same resource group as node
+      shareName: adapptaksshare
+    nodeStageSecretRef:
+      name: azure-secret
+      namespace: default
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
