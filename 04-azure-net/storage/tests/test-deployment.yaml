@@ -39,7 +39,7 @@ spec:
           command: ["sleep"]
           args: ["infinity"]
           volumeMounts:
-            - mountPath: /host
+            - mountPath: /mnt/azure
               name: my-pv-storage
             - mountPath: /var/run
               name: host
