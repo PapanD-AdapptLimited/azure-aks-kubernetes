@@ -18,7 +18,7 @@ spec:
       volumes:
         - name: my-pv-storage
           persistentVolumeClaim:
-            claimName: my-pv-claim
+            claimName: azurefile
         - name: host
           hostPath:
             path: /var/run

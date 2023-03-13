@@ -1,6 +1,17 @@
 # azure-aks-kubernetes
 Azure AKS Kubernetes
 
+az aks update -n myAKSCluster -g myResourceGroup --enable-disk-driver --enable-file-driver --enable-blob-driver --enable-snapshot-controller
+
+
+az aks list
+
+# Get Load Balancer
+az network public-ip list --query [[].ipAddress,[].name]
+
+# 
+az network publicip update -g rg-
+
 
 docker build -t papanadappt/my-node-app:0.0.2 .
 docker run -d -p 8081:8081 --name myapp papanadappt/my-node-app:0.0.2

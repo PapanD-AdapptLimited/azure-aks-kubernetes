@@ -22,7 +22,7 @@ spec:
           #   shareName: fca53bc43807c44379d142c
           #   readOnly: false
           persistentVolumeClaim:
-            claimName: my-pv-claim
+            claimName: azurefile
         - name: host
           hostPath:
             path: /var/run
