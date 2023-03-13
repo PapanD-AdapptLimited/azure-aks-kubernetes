@@ -21,7 +21,7 @@ spec:
       volumes:
         - name: my-pv-storage
           persistentVolumeClaim:
-            claimName: azurefile
+            claimName: my-pv-claim
       containers:
         - name: ibm-ca
           image: hyperledger/fabric-ca:1.5.3
