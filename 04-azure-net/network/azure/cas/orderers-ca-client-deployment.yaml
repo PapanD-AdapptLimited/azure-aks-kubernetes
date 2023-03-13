@@ -43,19 +43,19 @@ spec:
           volumeMounts:
             - mountPath: /scripts
               name: my-pv-storage
-              subPath: files/scripts
+              subPath: /mnt/azure/files/scripts
             - mountPath: /state
               name: my-pv-storage
-              subPath: state
+              subPath: /mnt/azure/state
             - mountPath: /files
               name: my-pv-storage
-              subPath: files
+              subPath: /mnt/azure/files
             - mountPath: /etc/hyperledger/fabric-ca-server
               name: my-pv-storage
-              subPath: state/orderers-ca
+              subPath: /mnt/azure/state/orderers-ca
             - mountPath: /etc/hyperledger/fabric-ca-client
               name: my-pv-storage
-              subPath: state/orderers-ca-client
+              subPath: /mnt/azure/state/orderers-ca-client
             - mountPath: /etc/hyperledger/fabric-ca/crypto-config
               name: my-pv-storage
-              subPath: files/crypto-config
+              subPath: /mnt/azure/files/crypto-config

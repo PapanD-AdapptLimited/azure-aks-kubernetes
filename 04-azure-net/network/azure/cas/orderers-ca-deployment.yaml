@@ -41,7 +41,7 @@ spec:
           volumeMounts:
             - mountPath: /scripts
               name: my-pv-storage
-              subPath: files/scripts
+              subPath: /mnt/azure/files/scripts
             - mountPath: /etc/hyperledger/fabric-ca-server
               name: my-pv-storage
               subPath: state/orderers-ca
