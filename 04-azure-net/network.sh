@@ -203,9 +203,9 @@ function start(){
 
     echo "Setup Network"
 
-    createNS
-    # applyPVC
-    # applyStorageTestPods
+    # createNS
+    applyPVC
+    applyStorageTestPods
 
     # copyFilesToRemotePod
     # applyCAs
