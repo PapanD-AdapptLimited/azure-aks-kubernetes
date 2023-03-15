@@ -20,6 +20,22 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: peer0-ibm-metrics
+  labels:
+    app: peer0-ibm-deployment
+    metrics-service: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: peer0-ibm-deployment
+  ports:
+    - name: "peer-metrics"
+      port: 9443
+      targetPort: 9443
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: peer1-ibm-service
   labels: {
     component: peer1,
@@ -35,3 +51,19 @@ spec:
   ports:
     - port: 7051
       targetPort: 7051
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: peer1-ibm-metrics
+  labels:
+    app: peer1-ibm-deployment
+    metrics-service: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: peer1-ibm-deployment
+  ports:
+    - name: "peer-metrics"
+      port: 9443
+      targetPort: 9443

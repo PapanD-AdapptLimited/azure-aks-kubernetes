@@ -20,6 +20,22 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: peer0-oracle-metrics
+  labels:
+    app: peer0-oracle-deployment
+    metrics-service: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: peer0-oracle-deployment
+  ports:
+    - name: "peer-metrics"
+      port: 9443
+      targetPort: 9443
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: peer1-oracle-service
   labels: {
     component: peer1,
@@ -35,3 +51,19 @@ spec:
   ports:
     - port: 7051
       targetPort: 7051
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: peer1-oracle-metrics
+  labels:
+    app: peer1-oracle-deployment
+    metrics-service: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: peer1-oracle-deployment
+  ports:
+    - name: "peer-metrics"
+      port: 9443
+      targetPort: 9443

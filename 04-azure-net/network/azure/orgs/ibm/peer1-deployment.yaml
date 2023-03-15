@@ -28,9 +28,41 @@ spec:
         - name: host
           hostPath:
             path: /var/run
+        - name: builders-config
+          configMap:
+            name: builders-config
+            items:
+              - key: core.yaml
+                path: core.yaml
+        - name: external-builder-detect
+          configMap:
+            name: builders-config
+            items:
+              - key: detect
+                path: detect
+                mode: 0744
+        - name: external-builder-build
+          configMap:
+            name: builders-config
+            items:
+              - key: build
+                path: build
+                mode: 0744
+        - name: external-builder-release
+          configMap:
+            name: builders-config
+            items:
+              - key: release
+                path: release
+                mode: 0744
       containers:
         - name: peer1-ibm
           image: hyperledger/fabric-peer:2.4
+          ports:
+            - containerPort: 7051
+            - containerPort: 7052
+            - containerPort: 7053
+            - containerPort: 9443
           workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
           command: ["peer"]
           args: ["node","start"]
@@ -55,8 +87,8 @@ spec:
               value: peer1-ibm-service:7051
             - name: CORE_PEER_GOSSIP_ENDPOINT
               value: peer1-ibm-service:7051
-            # - name: CORE_PEER_CHAINCODELISTENADDRESS
-            #   value: 0.0.0.0:7052
+            - name: CORE_PEER_CHAINCODELISTENADDRESS
+              value: 0.0.0.0:7052
             - name: CORE_PEER_LOCALMSPID
               value: ibm
             - name: CORE_PEER_ENDORSER_ENABLED
@@ -71,8 +103,8 @@ spec:
               value: /etc/hyperledger/fabric/tls/server.key
             - name: CORE_PEER_TLS_ROOTCERT_FILE
               value: /etc/hyperledger/fabric/tls/ca.crt
-            - name: CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG
-              value: "{\"peername\":\"ibmpeer1\"}"
+            # - name: CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG
+            #   value: "{\"peername\":\"ibmpeer1\"}"
             - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
               value: peer1-ibm-couchdb:5984
             - name: CORE_LEDGER_STATE_STATEDATABASE
@@ -81,12 +113,31 @@ spec:
               value: nick
             - name: CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
               value: "1234"
+            - name: CORE_OPERATIONS_LISTENADDRESS
+              value: 0.0.0.0:9443
+            - name: CORE_METRICS_PROVIDER
+              value: prometheus
           volumeMounts:
             - mountPath: /var/run
               name: host
-            - mountPath: /etc/hyperledger/fabric
-              name: my-pv-storage
-              subPath: files/config/org1
+            # - mountPath: /opt/gopath/src/chaincode-javascript
+            #   name: my-pv-storage
+            #   subPath: files/chaincode/chaincode-javascript
+            # - mountPath: /etc/hyperledger/fabric
+            #   name: my-pv-storage
+            #   subPath: files/config/org1
+            - mountPath: /etc/hyperledger/fabric/core.yaml
+              name: builders-config
+              subPath: core.yaml
+            - mountPath: /builders/external/bin/detect
+              name: external-builder-detect
+              subPath: detect
+            - mountPath: /builders/external/bin/build
+              name: external-builder-build
+              subPath: build
+            - mountPath: /builders/external/bin/release
+              name: external-builder-release
+              subPath: release
             - mountPath: /etc/hyperledger/fabric/msp
               name: my-pv-storage
               subPath: files/crypto-config/peerOrganizations/ibm/peers/peer1-ibm/msp

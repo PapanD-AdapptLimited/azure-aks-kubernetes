@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+# ${org}-ccaas-${cc_name} ibm-ccaas-marbles
+#
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,6 +31,10 @@ spec:
               value: {{CHAINCODE_ID}}
             - name: CORE_CHAINCODE_ID_NAME
               value: {{CHAINCODE_ID}}
+            - name: CHAINCODE_CCID
+              value: {{CHAINCODE_ID}}
+            # - name: CHAINCODE_ADDRESS
+            #   value: "0.0.0.0:7052"
           ports:
             - containerPort: 9999
 
@@ -42,5 +48,8 @@ spec:
     - name: chaincode
       port: 9999
       protocol: TCP
+    # - name: grpc
+    #   port: 7052
+    #   protocol: 7052
   selector:
     app: oracle{{PEER_NAME}}-ccaas-{{CHAINCODE_NAME}}
