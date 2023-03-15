@@ -118,9 +118,11 @@ func main() {
 		},
 	}
 
-	err := shim.Start(new(SimpleChaincode))
+	// Start the chaincode external server
+	err := server.Start()
+
 	if err != nil {
-		fmt.Printf("Error starting Simple chaincode: %s", err)
+		fmt.Printf("Error starting Marbles02 chaincode: %s", err)
 	}
 }
 
