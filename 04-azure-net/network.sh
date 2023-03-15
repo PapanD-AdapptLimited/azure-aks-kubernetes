@@ -2,7 +2,9 @@
 
 export NS=blockchain
 export PATH_TO_RESOURCE=$PWD/network/azure
+
 # Cloud Settings
+export MOUNT_PATH=/mnt/azure
 
 
 function createNS(){
@@ -18,6 +20,11 @@ function applyPV(){
     kubectl -n $NS apply -f ${PATH_TO_RESOURCE}/storage/pv.yaml
 
     sleep 5
+
+    # copy azure-secret to blockchain namespace
+    kubectl get secret azure-secret --namespace=default -o yaml | sed 's/namespace: .*/namespace: blockchain/' | kubectl apply -f -
+
+    sleep 2
 }
 
 function destroyPV(){
@@ -52,7 +59,7 @@ function deletePVC(){
 function applyStorageTestPods(){
 
     kubectl -n $NS apply -f $PATH_TO_RESOURCE/storage/tests
-
+    # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
     sleep 60
 
 }
@@ -67,49 +74,37 @@ function copyFilesToRemotePod(){
 
     # Create Remote Directory
 
-    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- mkdir -p /host/files/scripts
-    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- mkdir -p /host/files/chaincode
+    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- mkdir -p $MOUNT_PATH/files/scripts
+    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- mkdir -p $MOUNT_PATH/files/chaincode
 
 
     # Copy files from local to remote cluster
-    kubectl -n $NS cp ./scripts $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/
-    kubectl -n $NS cp ./network/aws/configtx.yaml $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files
-    kubectl -n $NS cp ./network/aws/config.yaml $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files
+    kubectl -n $NS cp ./scripts $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/
+    kubectl -n $NS cp ./network/azure/configtx.yaml $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
+    kubectl -n $NS cp ./network/azure/config.yaml $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
 
-    kubectl -n $NS cp ./network/aws/config $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files
+    kubectl -n $NS cp ./network/azure/config $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
 
-    # kubectl -n $NS cp ./chaincode/resources $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/chaincode
-    # kubectl -n $NS cp ./chaincode/resource_types $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/chaincode
-    kubectl -n $NS cp ./chaincode $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files
-
-    #kubectl -n $NS cp ./chaincode/application-go $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/chaincode
-    # kubectl -n $NS cp ./chaincode/application-javascript $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/chaincode
-
-    # CHAINCODE >> asset-transfer-basic
-    # kubectl -n $NS cp ../asset-transfer-basic $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/chaincode/application-go
-
-    # Copy script files
-    # kubectl -n $NS cp ./scripts/pkgk8scc.sh $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files/scripts
-    kubectl -n $NS cp ./fabric-samples/bin $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/host/files
-
-    sleep 20
+    kubectl -n $NS cp ./chaincode $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
+    
+    kubectl -n $NS cp ./fabric-samples/bin $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
 }
 
 function removeFilesFromRemotePod(){
 
-    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- rm -R /host/files
-    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- rm -Rf /host/state
+    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- rm -rf $MOUNT_PATH/files
+    kubectl -n $NS exec $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- rm -rf $MOUNT_PATH/state
 
 }
 
 function applyCAs(){
-    kubectl -n $NS apply -f network/aws/cas
+    kubectl -n $NS apply -f network/azure/cas
 
     sleep 20
 }
 
 function destroyCAs(){
-    kubectl -n $NS delete -f network/aws/cas
+    kubectl -n $NS delete -f network/azure/cas
 }
 
 function buildArtifacts(){
@@ -224,12 +219,12 @@ function start(){
     echo "Setup Network"
 
     # createNS
-    applyPV
-    applyPVC
-    applyStorageTestPods
+    # applyPV
+    # applyPVC
+    # applyStorageTestPods  # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
 
-    # copyFilesToRemotePod
-    # applyCAs
+    copyFilesToRemotePod
+    applyCAs
 
     # *** buildArtifacts *** 
 
