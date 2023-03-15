@@ -14,7 +14,15 @@ function deleteNS(){
 }
 
 
+function applyPV(){
+    kubectl -n $NS apply -f ${PATH_TO_RESOURCE}/storage/pv.yaml
 
+    sleep 5
+}
+
+function destroyPV(){
+    kubectl delete -f ${PATH_TO_RESOURCE}/storage/pv.yaml
+}
 
 function applyPVC(){
     kubectl -n $NS apply -f ${PATH_TO_RESOURCE}/storage/pvc.yaml
@@ -216,6 +224,7 @@ function start(){
     echo "Setup Network"
 
     # createNS
+    applyPV
     applyPVC
     applyStorageTestPods
 
@@ -250,6 +259,7 @@ function destroy(){
 
     destroyStorageTestPods
     deletePVC
+    destroyPV
 
     # deleteNS
     
@@ -257,5 +267,5 @@ function destroy(){
 
 # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
 
-# start
-destroy
+start
+# destroy
