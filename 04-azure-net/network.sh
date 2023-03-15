@@ -17,7 +17,7 @@ function deleteNS(){
 
 
 function applyPVC(){
-    kubectl -n $NS apply -f ${PATH_TO_NETWORK_RESOURCE}/storage/pvc.yaml
+    kubectl -n $NS apply -f ${PATH_TO_RESOURCE}/storage/pvc.yaml
 
     sleep 5
 
@@ -31,7 +31,7 @@ function applyPVC(){
 
 function applyStorageTestPods(){
 
-    kubectl -n $NS apply -f $PATH_TO_NETWORK_RESOURCE/storage/tests
+    kubectl -n $NS apply -f $PATH_TO_RESOURCE/storage/tests
 
     sleep 60
 
@@ -39,7 +39,7 @@ function applyStorageTestPods(){
 
 function destroyStorageTestPods(){
 
-    kubectl -n $NS delete -f $PATH_TO_NETWORK_RESOURCE/storage/tests
+    kubectl -n $NS delete -f $PATH_TO_RESOURCE/storage/tests
 
 }
 
