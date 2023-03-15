@@ -53,6 +53,9 @@ spec:
             - name: CORE_PEER_TLS_ROOTCERT_FILE
               value: /etc/hyperledger/fabric/tls/ca.crt
           volumeMounts:
+            - mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer/scripts
+              name: my-pv-storage
+              subPath: files/scripts
             - mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer/orderer
               name: my-pv-storage
               subPath: files/orderer

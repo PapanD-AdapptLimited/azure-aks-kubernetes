@@ -35,8 +35,10 @@ spec:
           command: ["peer"]
           args: ["node","start"]
           env:
-            # - name: FABRIC_LOGGING_SPEC
-            #   value: DEBUG
+            - name: FABRIC_CFG_PATH
+              value: /etc/hyperledger/fabric
+            - name: FABRIC_LOGGING_SPEC
+              value: DEBUG
             - name: CORE_VM_ENDPOINT
               value: unix:///var/run/docker.sock
             - name: CORE_PEER_ADDRESSAUTODETECT
@@ -53,8 +55,8 @@ spec:
               value: peer0-ibm-service:7051
             - name: CORE_PEER_GOSSIP_ENDPOINT
               value: peer0-ibm-service:7051
-            - name: CORE_PEER_CHAINCODELISTENADDRESS
-              value: 0.0.0.0:7052
+            #- name: CORE_PEER_CHAINCODELISTENADDRESS
+            #  value: 0.0.0.0:7052
             - name: CORE_PEER_LOCALMSPID
               value: ibm
             - name: CORE_PEER_ENDORSER_ENABLED
@@ -69,6 +71,8 @@ spec:
               value: /etc/hyperledger/fabric/tls/server.key
             - name: CORE_PEER_TLS_ROOTCERT_FILE
               value: /etc/hyperledger/fabric/tls/ca.crt
+            - name: CHAINCODE_AS_A_SERVICE_BUILDER_CONFIG
+              value: "{\"peername\":\"ibmpeer0\"}"
             - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
               value: peer0-ibm-couchdb:5984
             - name: CORE_LEDGER_STATE_STATEDATABASE
@@ -80,6 +84,9 @@ spec:
           volumeMounts:
             - mountPath: /var/run
               name: host
+            - mountPath: /etc/hyperledger/fabric
+              name: my-pv-storage
+              subPath: files/config/org1
             - mountPath: /etc/hyperledger/fabric/msp
               name: my-pv-storage
               subPath: files/crypto-config/peerOrganizations/ibm/peers/peer0-ibm/msp
