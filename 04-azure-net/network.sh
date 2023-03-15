@@ -230,10 +230,10 @@ function start(){
 
     # applyOrders
     # kubectl -n $NS apply -f network/azure/cc_builders/builders-config.yaml
-    applyCouchDB
-    applyPeers
-    applyCLIs
-    # createChannels
+    # applyCouchDB
+    # applyPeers
+    # applyCLIs
+    createChannels
 
 }
 
