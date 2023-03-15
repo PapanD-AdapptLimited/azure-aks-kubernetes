@@ -28,6 +28,18 @@ function applyPVC(){
     kubectl get sc,pv
 }
 
+function deletePVC(){
+    kubectl -n $NS delete -f ${PATH_TO_RESOURCE}/storage/pvc.yaml
+
+    sleep 5
+
+    kubectl -n $NS get pvc
+
+    sleep 2
+
+    kubectl get sc,pv
+}
+
 
 function applyStorageTestPods(){
 
@@ -236,11 +248,14 @@ function destroy(){
 
     # removeFilesFromRemotePod
 
-    # destroyStorageTestPods
+    destroyStorageTestPods
+    deletePVC
 
     # deleteNS
     
 }
 
-start
-# destroy
+# kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
+
+# start
+destroy
