@@ -128,51 +128,51 @@ function buildArtifacts(){
 }
 
 function applyOrders(){
-    kubectl -n $NS apply -f network/aws/orderers
+    kubectl -n $NS apply -f network/azure/orderers
 
     sleep 30
 }
 
 function destroyOrders(){
-    kubectl -n $NS delete -f network/aws/orderers
+    kubectl -n $NS delete -f network/azure/orderers
 }
 
 function applyCouchDB(){
-    kubectl -n $NS apply -f network/aws/orgs/ibm/couchdb 
-    kubectl -n $NS apply -f network/aws/orgs/oracle/couchdb
+    kubectl -n $NS apply -f network/azure/orgs/ibm/couchdb 
+    kubectl -n $NS apply -f network/azure/orgs/oracle/couchdb
 
     sleep 30
 }
 
 function destroyCouchDB(){
-    kubectl -n $NS delete -f network/aws/orgs/ibm/couchdb 
-    kubectl -n $NS delete -f network/aws/orgs/oracle/couchdb
+    kubectl -n $NS delete -f network/azure/orgs/ibm/couchdb 
+    kubectl -n $NS delete -f network/azure/orgs/oracle/couchdb
 
     sleep 5
 }
 
 function applyPeers(){
-    kubectl -n $NS apply -f network/aws/orgs/ibm/
-    kubectl -n $NS apply -f network/aws/orgs/oracle/
+    kubectl -n $NS apply -f network/azure/orgs/ibm/
+    kubectl -n $NS apply -f network/azure/orgs/oracle/
 
     sleep 30
 }
 
 function destroyPeers(){
-    kubectl -n $NS delete -f network/aws/orgs/ibm/
-    kubectl -n $NS delete -f network/aws/orgs/oracle/
+    kubectl -n $NS delete -f network/azure/orgs/ibm/
+    kubectl -n $NS delete -f network/azure/orgs/oracle/
 }
 
 function applyCLIs(){
-    kubectl -n $NS apply -f network/aws/orgs/ibm/cli 
-    kubectl -n $NS apply -f network/aws/orgs/oracle/cli
+    kubectl -n $NS apply -f network/azure/orgs/ibm/cli 
+    kubectl -n $NS apply -f network/azure/orgs/oracle/cli
 
     sleep 30
 }
 
 function destroyCLIs(){
-    kubectl -n $NS delete -f network/aws/orgs/ibm/cli 
-    kubectl -n $NS delete -f network/aws/orgs/oracle/cli
+    kubectl -n $NS delete -f network/azure/orgs/ibm/cli 
+    kubectl -n $NS delete -f network/azure/orgs/oracle/cli
 }
 
 
@@ -229,7 +229,7 @@ function start(){
     # *** buildArtifacts *** 
 
     applyOrders
-    # kubectl -n $NS apply -f network/aws/cc_builders/builders-config.yaml
+    # kubectl -n $NS apply -f network/azure/cc_builders/builders-config.yaml
     # applyCouchDB
     # applyPeers
     # applyCLIs
@@ -244,7 +244,7 @@ function destroy(){
     # destroyCLIs
     # destroyPeers
     # destroyCouchDB
-    # kubectl -n $NS delete -f network/aws/cc_builders/builders-config.yaml
+    # kubectl -n $NS delete -f network/azure/cc_builders/builders-config.yaml
     # destroyOrders
     # destroyCAs
 
