@@ -1,0 +1,34 @@
+#
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: org1-install-k8s-builder
+spec:
+  backoffLimit: 0
+  completions: 1
+  template:
+    metadata:
+      name: org1-install-k8s-builder
+    spec:
+      restartPolicy: "Never"
+      containers:
+        - name: main
+          image: ${K8S_CHAINCODE_BUILDER_IMAGE}:${K8S_CHAINCODE_BUILDER_VERSION}
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - "mkdir -p /mnt/fabric-org1/fabric/external_builders && cp -rv /opt/hyperledger/k8s_builder /mnt/fabric-org1/fabric/external_builders/"
+          volumeMounts:
+            - mountPath: /mnt/fabric-org1
+              name: my-pv-storage
+              subPath: files/config/org1
+      volumes:
+        - name: my-pv-storage
+          persistentVolumeClaim:
+            claimName: my-pv-claim

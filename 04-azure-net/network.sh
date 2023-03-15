@@ -228,8 +228,8 @@ function start(){
 
     # *** buildArtifacts *** 
 
-    applyOrders
-    # kubectl -n $NS apply -f network/azure/cc_builders/builders-config.yaml
+    # applyOrders
+    kubectl -n $NS apply -f network/azure/cc_builders/builders-config.yaml
     # applyCouchDB
     # applyPeers
     # applyCLIs
