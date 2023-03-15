@@ -87,7 +87,7 @@ function copyFilesToRemotePod(){
 
     kubectl -n $NS cp ./chaincode $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
     
-    kubectl -n $NS cp ./fabric-samples/bin $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
+    kubectl -n $NS cp ./bin $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
 }
 
 function removeFilesFromRemotePod(){
@@ -223,12 +223,12 @@ function start(){
     # applyPVC
     # applyStorageTestPods  # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
 
-    copyFilesToRemotePod
-    applyCAs
+    # copyFilesToRemotePod
+    # applyCAs
 
     # *** buildArtifacts *** 
 
-    # applyOrders
+    applyOrders
     # kubectl -n $NS apply -f network/aws/cc_builders/builders-config.yaml
     # applyCouchDB
     # applyPeers
