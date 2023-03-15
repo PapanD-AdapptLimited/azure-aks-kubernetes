@@ -10,9 +10,11 @@
 state
 crypto-config
 fabric-samples
+**/aws
 NOTES.md
 channels
 orderer
 **/go.sum
 **/fabconnect/events
 **/fabconnect/receipts
+
