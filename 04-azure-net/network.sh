@@ -257,5 +257,5 @@ function destroy(){
 
 # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
 
-start
-# destroy
+# start
+destroy
