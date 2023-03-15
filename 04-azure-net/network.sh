@@ -218,13 +218,13 @@ function start(){
 
     echo "Setup Network"
 
-    createNS
-    applyPV
-    applyPVC
-    applyStorageTestPods  # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
+    # createNS
+    # applyPV
+    # applyPVC
+    # applyStorageTestPods  # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
 
-    # copyFilesToRemotePod
-    # applyCAs
+    copyFilesToRemotePod
+    applyCAs
 
     # *** buildArtifacts *** 
 
