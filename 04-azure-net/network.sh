@@ -228,14 +228,15 @@ function start(){
 
     # *** buildArtifacts *** 
 
-    applyOrders
-    kubectl -n $NS apply -f network/azure/cc_builders/builders-config.yaml
-    applyCouchDB
-    applyPeers
-    applyCLIs
-    createChannels
+    # applyOrders
+    # kubectl -n $NS apply -f network/azure/cc_builders/builders-config.yaml
+    # applyCouchDB
+    # applyPeers
+    # applyCLIs
+    # createChannels
 
 
+    # /opt/gopath/src/github.com/
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer0-ibm-deployment | sed "s/^.\{4\}//") -- /bin/bash
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer1-ibm-deployment | sed "s/^.\{4\}//") -- /bin/bash
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer0-oracle-deployment  | sed "s/^.\{4\}//") -- /bin/bash
@@ -267,5 +268,5 @@ function destroy(){
 
 # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//") -- /bin/bash
 
-start
-# destroy
+# start
+destroy
