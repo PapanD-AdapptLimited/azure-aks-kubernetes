@@ -28,8 +28,6 @@ spec:
           workingDir: /var/hyperledger/orderer
           ports:
             - containerPort: 7050
-            # - containerPort: 7053
-            # - containerPort: 9443
           env:
           - name: ORDERER_GENERAL_LISTENADDRESS
             value: "0.0.0.0"
@@ -63,10 +61,6 @@ spec:
             value: /var/hyperledger/orderer/tls/server.crt
           - name: ORDERER_GENERAL_CLUSTER_ROOTCAS
             value: "[/var/hyperledger/orderer/tls/ca.crt]"
-          #- name: ORDERER_OPERATIONS_LISTENADDRESS
-          #  value: 0.0.0.0:9443
-          # - name: ORDERER_METRICS_PROVIDER
-          #  value: prometheus
           volumeMounts:
             - mountPath: /var/hyperledger/orderer/msp
               name: my-pv-storage

@@ -65,8 +65,8 @@ spec:
             value: "[/var/hyperledger/orderer/tls/ca.crt]"
           #- name: ORDERER_OPERATIONS_LISTENADDRESS
           #  value: 0.0.0.0:9443
-          #- name: ORDERER_METRICS_PROVIDER
-          #  value: prometheus
+          - name: ORDERER_METRICS_PROVIDER
+            value: prometheus
           volumeMounts:
             - mountPath: /var/hyperledger/orderer/msp
               name: my-pv-storage
