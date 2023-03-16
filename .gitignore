@@ -10,7 +10,7 @@
 state
 crypto-config
 fabric-samples
-**/aws
+**/COMMANDS.md
 NOTES.md
 channels
 orderer
