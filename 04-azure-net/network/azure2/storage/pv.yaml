@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: statefile
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile-csi
+  csi:
+    driver: file.csi.azure.com
+    readOnly: false
+    volumeHandle: unique-2222  # make sure this volumeid is unique for every identical share in the cluster
+    volumeAttributes:
+      resourceGroup: MC_horusaks-rg_horusakscluster_eastus  # optional, only set this when storage account is not in the same resource group as node
+      shareName: horusfileshare
+    nodeStageSecretRef:
+      name: azure-secret
+      namespace: blockchain
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - uid=0
+    - gid=0
+    - mfsymlinks
+    - cache=strict
+    - nosharesock
+    - nobrl
