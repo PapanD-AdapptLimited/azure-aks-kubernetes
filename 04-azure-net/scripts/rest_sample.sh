@@ -83,16 +83,16 @@ function rollout_rest_sample() {
 function launch_rest_sample() {
   local ns=$NS
 
-  rm -rf build
-  mkdir -p build/crypto-config
+  # rm -rf build
+  # mkdir -p build/crypto-config
 
-  kubectl -n $NS cp $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/crypto-config ./build/crypto-config
+  # kubectl -n $NS cp $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/crypto-config ./build/crypto-config
 
-  construct_rest_sample_configmap
+  # construct_rest_sample_configmap
 
-  # apply_template network/azure/orgs/fabric-rest-sample.yaml $ns
+  apply_template network/azure/orgs/fabric-rest-sample.yaml $ns
 
-  # kubectl -n $ns rollout status deploy/fabric-rest-sample
+  kubectl -n $ns rollout status deploy/fabric-rest-sample
 
   log ""
   log "The fabric-rest-sample has started."

@@ -9,7 +9,7 @@ kind: Deployment
 metadata:
   name: fabric-rest-sample
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: fabric-rest-sample
