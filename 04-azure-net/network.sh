@@ -2,6 +2,8 @@
 
 export NS=blockchain
 export PATH_TO_RESOURCE=$PWD/network/azure
+export LOG_FILE=network.log
+export DEBUG_FILE=network-debug.log
 
 # Cloud Settings
 export MOUNT_PATH=/mnt/azure
