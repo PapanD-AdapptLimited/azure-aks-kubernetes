@@ -47,6 +47,12 @@ spec:
               value: "BC42E734-062D-4AEE-A591-5973CB763430"
             - name: AS_LOCAL_HOST
               value: "false"
+            - name: HLF_MSP_ID_ORG1
+              value: "ibm"
+            - name: HLF_MSP_ID_ORG2
+              value: "oracle"
+            - name: HLF_CHANNEL_NAME
+              value: "mainchannel"
             - name: HLF_CHAINCODE_NAME
               value: "asset-transfer-basic"
 #            - name: REDIS_USERNAME

@@ -103,3 +103,5 @@ function launch_rest_sample() {
   log 'curl -s --header "X-Api-Key: ${SAMPLE_APIKEY}" http://fabric-rest-sample.'${DOMAIN}'/api/assets'
   log ""
 }
+
+# curl -s --header "X-Api-Key: 97834158-3224-4CE7-95F9-A148C886653E" http://20.242.248.65/api/assets
