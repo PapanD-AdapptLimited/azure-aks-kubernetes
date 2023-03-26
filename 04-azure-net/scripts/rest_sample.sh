@@ -84,9 +84,9 @@ function launch_rest_sample() {
   local ns=$NS
 
   rm -Rf build
-  mkdir -p build
+  mkdir -p build/crypto-config
 
-  kubectl -n $NS cp $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/crypto-config ./build
+  kubectl -n $NS cp $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/crypto-config ./build/crypto-config
 
   # construct_rest_sample_configmap
 
