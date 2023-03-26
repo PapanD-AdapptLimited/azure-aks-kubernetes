@@ -48,8 +48,8 @@ function construct_rest_sample_configmap() {
   # ca_pem=$CHANNEL_MSP_DIR/peerOrganizations/org2/msp/cacerts/ca-signcert.pem
   # echo "$(json_ccp 2 $peer_pem $ca_pem $ORG2_NS)" > build/fabric-rest-sample-config/HLF_CONNECTION_PROFILE_ORG2
 
-  peer_pem=$CHANNEL_MSP_DIR/peerOrganizations/$org2msp/msp/tlscacerts/tlsca-signcert.pem
-  ca_pem=$CHANNEL_MSP_DIR/peerOrganizations/$org2msp/msp/cacerts/ca-signcert.pem
+  peer_pem=$CHANNEL_MSP_DIR/peerOrganizations/$org2msp/msp/tlscacerts/oracle-ca-service-7054.pem
+  ca_pem=$CHANNEL_MSP_DIR/peerOrganizations/$org2msp/msp/cacerts/ca.oracle-cert.pem
   echo "$(json_ccp $org2msp $peer_pem $ca_pem $ns)" > $CONFIG_DIR/HLF_CONNECTION_PROFILE_ORG2
 
   # cp $ENROLLMENT_DIR/org1/users/org1admin/msp/signcerts/cert.pem $CONFIG_DIR/HLF_CERTIFICATE_ORG1
