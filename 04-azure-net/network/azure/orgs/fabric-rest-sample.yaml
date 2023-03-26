@@ -54,7 +54,7 @@ spec:
             - name: HLF_CHANNEL_NAME
               value: "mainchannel"
             - name: HLF_CHAINCODE_NAME
-              value: "asset-transfer-basic"
+              value: "chaincode-external"
 #            - name: REDIS_USERNAME
 #              value: redisuser
 #            - name: REDIS_PASSWORD
