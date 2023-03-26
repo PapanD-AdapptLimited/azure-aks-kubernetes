@@ -87,6 +87,8 @@ function copyFilesToRemotePod(){
 
     # Copy files from local to remote cluster
     kubectl -n $NS cp ./scripts $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/
+    # kubectl -n $NS cp ./scripts $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files/scripts
+
     kubectl -n $NS cp ./network/azure/configtx.yaml $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
     kubectl -n $NS cp ./network/azure/config.yaml $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files
 

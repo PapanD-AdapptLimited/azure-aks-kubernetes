@@ -27,7 +27,7 @@ function construct_rest_sample_configmap() {
   local ns=$NS
   local org1msp=ibm
   local org2msp=oracle
-  local TEMP_DIR=$MOUNT_PATH/files
+  local TEMP_DIR=./build/files
   push_fn "Constructing fabric-rest-sample connection profiles"
 
   ENROLLMENT_DIR=${TEMP_DIR}/crypto-config/peerOrganizations
@@ -82,7 +82,13 @@ function rollout_rest_sample() {
 
 function launch_rest_sample() {
   local ns=$NS
-  construct_rest_sample_configmap
+
+  rm -Rf build
+  mkdir -p build
+
+  kubectl -n $NS cp $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):$MOUNT_PATH/files ./build
+
+  # construct_rest_sample_configmap
 
   # apply_template network/azure/orgs/fabric-rest-sample.yaml $ns
 
