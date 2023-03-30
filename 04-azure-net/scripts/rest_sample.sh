@@ -104,4 +104,12 @@ function launch_rest_sample() {
   log ""
 }
 
+function bringdown_rest_sample(){
+
+  kubectl -n $NS delete -f network/azure/orgs/fabric-rest-sample.yaml
+  
+}
+
 # curl -s --header "X-Api-Key: 97834158-3224-4CE7-95F9-A148C886653E" http://20.242.248.65:3000/api/assets
+# curl --include --header "X-Api-Key: 97834158-3224-4CE7-95F9-A148C886653E" --request GET http://20.242.248.65:3000/api/assets/asset8
+# curl --include --header "Content-Type: application/json" --header "X-Api-Key: 97834158-3224-4CE7-95F9-A148C886653E" --request POST --data '{"ID":"asset8","Color":"black","Size":42,"Owner":"Priya","AppraisedValue":401}' http://20.242.248.65:3000/api/assets
