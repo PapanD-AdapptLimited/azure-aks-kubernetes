@@ -1,0 +1,1 @@
+{"processes":{"87cfca32-58e8-4688-833e-8003babe8afc":{"parent":null,"children":[]},"e55668e8-3c44-447c-9e83-8b5a7d4d4de3":{"parent":null,"children":[]}},"files":{"/Users/papandas/workspace/kubernetes/revision/fabric-sample/k8s-hyperledger-fabric-2.2/chaincode/extcc-horus-ts/src/index.ts":["e55668e8-3c44-447c-9e83-8b5a7d4d4de3"]},"externalIds":{}}
