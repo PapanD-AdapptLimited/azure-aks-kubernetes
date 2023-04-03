@@ -12,6 +12,7 @@
                 "fabric-contract-api": "^2.4.0",
                 "fabric-shim": "^2.4.0",
                 "json-stringify-deterministic": "^1.0.1",
+                "moment": "^2.29.4",
                 "sort-keys-recursive": "^2.1.2"
             },
             "devDependencies": {
@@ -2092,6 +2093,14 @@
             "dev": true,
             "engines": {
                 "node": ">=10"
+            }
+        },
+        "node_modules/moment": {
+            "version": "2.29.4",
+            "resolved": "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz",
+            "integrity": "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==",
+            "engines": {
+                "node": "*"
             }
         },
         "node_modules/ms": {
@@ -5430,6 +5439,11 @@
                     "dev": true
                 }
             }
+        },
+        "moment": {
+            "version": "2.29.4",
+            "resolved": "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz",
+            "integrity": "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w=="
         },
         "ms": {
             "version": "2.1.3",
