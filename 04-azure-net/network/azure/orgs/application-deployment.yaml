@@ -1,0 +1,83 @@
+#
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-deployment
+  template:
+    metadata:
+      labels:
+        app: application-deployment
+    spec:
+      containers:
+        - name: main
+          image: papanadappt/client-api:1.0.0
+          imagePullPolicy: Always 
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: DEBUG
+              value: "true"
+            - name: HOSTNAME
+              value: "localhost:3010"
+            - name: PORT
+              value: "3010"
+            - name: CCP_PATH
+              value: "/fabric/application/gateways"
+            - name: WALLET_PATH
+              value: "/fabric/application/wallet"
+            - name: AS_LOCALHOST
+              value: "false"
+            - name: CHANNEL_NAME
+              value: mainchannel
+            - name: CHAINCODE_NAME
+              value: extcc-horus-ts-1
+            
+          envFrom:
+            - configMapRef:
+                name: app-fabric-org1-v1-map
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "0.1"
+          volumeMounts:
+            - mountPath: /fabric/application/wallet
+              name: fabricids
+              subPath: files/application/wallet
+            - mountPath: /fabric/application/gateways   
+              name: fabric-ccp  
+              subPath: files/application/gateways
+            - name: tlscerts
+              mountPath: /fabric/tlscacerts
+      volumes:
+        - name: fabric-ccp
+          configMap:
+            name: app-fabric-ccp-v1-map
+        - name: fabricids
+          configMap:
+            name: app-fabric-ids-v1-map
+        - name: tlscerts
+          configMap:
+            name: app-fabric-tls-v1-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-deployment
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 3010
+      protocol: TCP
+  selector:
+    app: application-deployment

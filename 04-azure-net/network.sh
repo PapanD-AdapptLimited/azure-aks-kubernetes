@@ -14,6 +14,7 @@ export MOUNT_PATH=/mnt/azure
 
 . scripts/utils.sh
 . scripts/rest_sample.sh
+. scripts/application_connection.sh
 
 
 function createNS(){
@@ -248,12 +249,14 @@ function start(){
 
 
     # /opt/gopath/src/github.com/
+    # export NS=blockchain
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer0-ibm-deployment | sed "s/^.\{4\}//") -- /bin/bash
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer1-ibm-deployment | sed "s/^.\{4\}//") -- /bin/bash
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer0-oracle-deployment  | sed "s/^.\{4\}//") -- /bin/bash
     # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer1-oracle-deployment  | sed "s/^.\{4\}//") -- /bin/bash
 
-    launch_rest_sample
+    #launch_rest_sample
+    application_connection
 }
 
 function destroy(){
