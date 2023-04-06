@@ -18,10 +18,6 @@ spec:
       labels:
         app: application-deployment
     spec:
-      volumes:
-        - name: my-pv-storage
-          persistentVolumeClaim:
-            claimName: my-pv-claim
       containers:
         - name: main
           image: papanadappt/client-api:1.0.0
@@ -55,23 +51,26 @@ spec:
               cpu: "0.1"
           volumeMounts:
             - mountPath: /fabric/application/wallet
-              name: fabricids
+              name: my-pv-storage
               subPath: files/application/wallet
             - mountPath: /fabric/application/gateways   
-              name: fabric-ccp  
+              name: my-pv-storage
               subPath: files/application/gateways
             - name: tlscerts
               mountPath: /fabric/tlscacerts
       volumes:
-        - name: fabric-ccp
-          configMap:
-            name: app-fabric-ccp-v1-map
-        - name: fabricids
-          configMap:
-            name: app-fabric-ids-v1-map
+        # - name: fabric-ccp
+        #   configMap:
+        #     name: app-fabric-ccp-v1-map
+        # - name: fabricids
+        #   configMap:
+        #     name: app-fabric-ids-v1-map
         - name: tlscerts
           configMap:
             name: app-fabric-tls-v1-map
+        - name: my-pv-storage
+          persistentVolumeClaim:
+            claimName: my-pv-claim
 ---
 apiVersion: v1
 kind: Service
