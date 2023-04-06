@@ -3,7 +3,7 @@ set -x
 
 PROFILE=papanadappt
 NAME=extcc-horus-ts
-TAG=1.0.0
+TAG=1.0.2
 
 # Remove docker image containers
 docker rmi -f $(docker images $PROFILE/$NAME -q)

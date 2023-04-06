@@ -18,8 +18,7 @@ ARG CC_SERVER_PORT
 
 # Setup tini to work better handle signals
 ENV TINI_VERSION v0.19.0
-# amd64
-ENV PLATFORM=arm64 
+ENV PLATFORM=amd64 
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${PLATFORM} /tini
 RUN chmod +x /tini
 
@@ -31,8 +30,8 @@ COPY --chown=node:node docker/docker-entrypoint.sh /usr/src/app/docker-entrypoin
 
 RUN npm ci --omit=dev && npm cache clean --force
 
-ENV PORT $CC_SERVER_PORT
-EXPOSE $CC_SERVER_PORT
+ENV PORT 9999
+EXPOSE 9999
 ENV NODE_ENV=production
 
 USER node
