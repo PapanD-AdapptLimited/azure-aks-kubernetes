@@ -114,7 +114,9 @@ EOF
 
 function application_connection() {
 
- construct_application_configmap
+ # construct_application_configmap
+
+ kubectl -n $NS cp ./build/application $(kubectl -n $NS get pods -o=name | grep example1 | sed "s/^.\{4\}//"):/mnt/azure/files
 
 
  # kubectl -n $NS apply -f network/azure/orgs/application-deployment.yaml
