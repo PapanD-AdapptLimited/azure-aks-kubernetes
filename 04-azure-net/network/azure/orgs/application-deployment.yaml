@@ -18,6 +18,10 @@ spec:
       labels:
         app: application-deployment
     spec:
+      volumes:
+        - name: my-pv-storage
+          persistentVolumeClaim:
+            claimName: my-pv-claim
       containers:
         - name: main
           image: papanadappt/client-api:1.0.0
