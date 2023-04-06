@@ -122,9 +122,9 @@ function application_connection() {
  kubectl -n $NS apply -f network/azure/orgs/application-deployment.yaml
  kubectl -n $NS rollout status deploy/application-deployment
 
- kubectl -n $NS get pods
- kubectl -n $NS describe pods $(kubectl -n $NS get pods -o=name | grep application-deployment | sed "s/^.\{4\}//") 
- kubectl -n $NS logs -f $(kubectl -n $NS get pods -o=name | grep application-deployment | sed "s/^.\{4\}//")  
- kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep application-deployment | sed "s/^.\{4\}//") -- /bin/sh
+#  kubectl -n $NS get pods
+#  kubectl -n $NS describe pods $(kubectl -n $NS get pods -o=name | grep application-deployment | sed "s/^.\{4\}//") 
+#  kubectl -n $NS logs -f $(kubectl -n $NS get pods -o=name | grep application-deployment | sed "s/^.\{4\}//")  
+#  kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep application-deployment | sed "s/^.\{4\}//") -- /bin/sh
 
 }
