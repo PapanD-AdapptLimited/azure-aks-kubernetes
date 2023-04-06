@@ -1,0 +1,741 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Welcome to Horus HLF K8s Blockchain",
+        "version": "1.0.0",
+        "title": "Horus Hyperledger Fabric K8s Network"
+    },
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Health-Check",
+            "description": "This APIs handles the Health-Check, Ping & Hostname functionalitys.",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "#"
+            }
+        },
+        {
+            "name": "Users",
+            "description": "This APIs handles the Create, Read, Update, Delete of Users.",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "#"
+            }
+        },
+        {
+            "name": "Documents",
+            "description": "This APIs handles the Create, Read, Update, Delete of Documents.",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "#"
+            }
+        }
+    ],
+    "schemes": ["http","https"],
+    "paths": {
+        "/health": {
+            "get": {
+                "tags": ["Health-Check"],
+                "summary": "Health Check",
+                "description": "This api lets user check the health of the API Service",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    },
+                    "default": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/ping": {
+            "get": {
+                "tags": ["Health-Check"],
+                "summary": "Ping",
+                "description": "Return the enviroment variables",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    },
+                    "default": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/hostname": {
+            "get": {
+                "tags": ["Health-Check"],
+                "summary": "Hostname",
+                "description": "This api lets user check the health of the API Service",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NOT FOUND"
+                    },
+                    "default": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/{OrgName}/chain-info": {
+            "get": {
+                "summary": "Chain Info",
+                "description": "",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "OrgName",
+                    "in": "path",
+                    "description": "Organisation to check",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/orgName"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get All User",
+                "description": "Get All User.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users"],
+                "summary": "Add New User",
+                "description": "This API lets user register a new user.",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "produces": ["application/json"],
+                "parameters": [
+                  {
+                    "name": "representativeEmail",
+                    "in": "formData",
+                    "description": "User's Email Id",
+                    "required": true,
+                    "type": "string",
+                    "default":"email@example.com"
+                  },
+                  {
+                    "name": "representativeName",
+                    "in": "formData",
+                    "description": "User's Full Name",
+                    "required": true,
+                    "type": "string"
+                  },
+                  {
+                    "name": "representativePassword",
+                    "in": "formData",
+                    "description": "User's Password",
+                    "required": true,
+                    "type": "string",
+                    "default": "password"
+                  },
+                  {
+                    "name": "representativeOrganisation",
+                    "in": "formData",
+                    "description": "Organisation user belongs.",
+                    "required": true,
+                    "type": "string",
+                    "enum":["org1","org2","ibm","oracle"],
+                    "default": "org1"
+                  },
+                  {
+                    "name": "representativeRole",
+                    "in": "formData",
+                    "description": "User's Role",
+                    "required": true,
+                    "type": "string",
+                    "enum": ["horus_super_admins","horus_regional_admins","customer_administrators","customer_department_head","customer_team_lead","project_manager","customer_users"],
+                    "default": "customer_users"
+                  }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{RepresentativeEmail}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Read User",
+                "description": "Get one User from the blockchain network.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "RepresentativeEmail",
+                    "in": "path",
+                    "description": "Check one user",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/RepresentativeEmail"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Users"],
+                "summary": "Update User",
+                "description": "Update one User from the blockchain network.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "RepresentativeEmail",
+                        "in": "path",
+                        "description": "Update one user",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RepresentativeEmail"
+                        }
+                    },
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User's Details",
+                        "required": false,
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/UserObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Users"],
+                "summary": "Delete User",
+                "description": "Delete one User from the blockchain network.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "RepresentativeEmail",
+                    "in": "path",
+                    "description": "Delete one user",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/RepresentativeEmail"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            }
+        },
+        "/documents/all/{RepresentativeEmail}": {
+            "get": {
+                "tags": ["Documents"],
+                "summary": "Get All User",
+                "description": "Get All User.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "RepresentativeEmail",
+                    "in": "path",
+                    "description": "Check on documents by user's email id.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/RepresentativeEmail"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            } 
+        },
+        "/documents": {
+            "post": {
+                "tags": ["Documents"],
+                "summary": "Add New Document",
+                "description": "This API lets create a new Document for an User.",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "produces": ["application/json"],
+                "parameters": [
+                  {
+                    "name": "representativeEmail",
+                    "in": "formData",
+                    "description": "Creator's Email Id",
+                    "required": true,
+                    "type": "string",
+                    "default":"email@example.com"
+                  },
+                  {
+                    "name": "dataHash",
+                    "in": "formData",
+                    "description": "Documents's DataHash",
+                    "required": true,
+                    "type": "string",
+                    "default":"#DataHash"
+                  },
+                  {
+                    "name": "title",
+                    "in": "formData",
+                    "description": "Document's Title",
+                    "required": true,
+                    "type": "string",
+                    "default": ""
+                  },
+                  {
+                    "name": "metadata",
+                    "in": "formData",
+                    "description": "Document's Metadata.",
+                    "required": true,
+                    "type": "string",
+                    "default": "M-E-T-A-D-A-T-A"
+                  },
+                  {
+                    "name": "documentPath",
+                    "in": "formData",
+                    "description": "Document's Path",
+                    "required": true,
+                    "type": "string",
+                    "default": "/home"
+                  }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            }
+        },
+        "/documents/{DocumentId}": {
+            "get": {
+                "tags": ["Documents"],
+                "summary": "Read Document",
+                "description": "This API lets you check one Document by Id.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "DocumentId",
+                    "in": "path",
+                    "description": "Get document",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/DocumentId"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Documents"],
+                "summary": "Update Document",
+                "description": "This API lets you update the document.",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "DocumentId",
+                        "in": "path",
+                        "description": "Delete one document",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DocumentId"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "description": "Document's Title",
+                        "required": true,
+                        "type": "string",
+                        "default":""
+                    },
+                    {
+                        "name": "docStatus",
+                        "in": "formData",
+                        "description": "Document's Status",
+                        "required": true,
+                        "type": "string",
+                        "enum": [ "create", "edit", "update", "share", "delete"],
+                        "default": "update"
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "description": "Document active",
+                        "required": true,
+                        "type": "boolean",
+                        "default": "true"
+                    },
+                    {
+                        "name": "version",
+                        "in": "formData",
+                        "description": "Document's Version",
+                        "required": true,
+                        "type": "integer",
+                        "default": 1,
+                        "minimum": 1,
+                        "maximum": 100
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Documents"],
+                "summary": "Delete Document",
+                "description": "This API will delete the document.",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "DocumentId",
+                    "in": "path",
+                    "description": "Delete one document",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/DocumentId"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Success200"
+                        }
+                    },
+                    "500":{
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponce"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions":{
+        "orgName": {
+            "type": "string", 
+            "description": "Name of a Organisation",
+            "example": "org1"
+        },
+        "UserObject2":{
+            "type": "object",
+            "required": [
+                "representativeName",
+                "representativeEmail",
+                "representativePassword",
+                "representativeOrganisation",
+                "representativeRole"
+            ],
+            "properties": {
+                "representativeName": {
+                    "type": "string",
+                    "example": "Jane Doe"
+                },
+                "representativeEmail": {
+                    "type": "string",
+                    "example": "jane.doe@adappt.ai"
+                },
+                "representativePassword": {
+                    "type": "string",
+                    "example": "password"
+                },
+                "representativeOrganisation": {
+                    "type": "string",
+                    "enum": ["org1","org2"],
+                    "example": "org1"
+                },
+                "representativeRole": {
+                    "type": "string",
+                    "enum": ["project_manager", "customer_users"],
+                    "example": "customer_users"
+                }
+            }
+        },
+        "UserObject": {
+            "type": "object",
+            "properties": {
+                "representativeName": {
+                    "type": "string",
+                    "example": "Jane Doe"
+                },
+                "representativeEmail": {
+                    "type": "string",
+                    "example": "jane.doe@adappt.ai"
+                },
+                "representativePassword": {
+                    "type": "string",
+                    "example": "password"
+                },
+                "representativeOrganisation": {
+                    "type": "string",
+                    "enum": ["org1","org2"],
+                    "example": "org1"
+                },
+                "representativeRole": {
+                    "type": "string",
+                    "enum": ["project_manager", "customer_users"],
+                    "example": "customer_users"
+                },
+                "params": {
+                    "type": "string",
+                    "example": "{params}"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": "true"
+                },
+                "lastLogin": {
+                    "type": "string",
+                    "example": ""
+                }
+            }
+        },
+        "RepresentativeEmail": {
+            "type": "string", 
+            "description": "Email Id of the user",
+            "example": ""
+        },
+        "DocumentId":{
+            "type": "string", 
+            "description": "Document Id of the user",
+            "example": ""
+        },
+        "Success200": {
+            "type": "object",
+            "required": [
+                "status",
+                "data",
+                "errorMessage"
+            ],
+            "properties": {
+                "status": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "data":{
+                    "type": "object"
+                },
+                "errorMessage": {
+                    "type": "string",
+                    "example": null
+                }
+            }
+        },
+        "ErrorResponce": {
+            "type": "object",
+            "required": [
+                "status",
+                "data",
+                "errorMessage"
+            ],
+            "properties": {
+                "status": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "data": {
+                    "type": "string",
+                    "example": null
+                },
+                "errorMessage": {
+                    "type": "array",
+                    "items":{
+                        "$ref": "#/definitions/ErrorObj"
+                    }  
+                }
+            }
+        },
+        "ErrorObj": {
+            "type": "object",
+            "required": [
+                "value",
+                "msg",
+                "data"
+            ],
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "example": null
+                },
+                "msg": {
+                    "type": "string",
+                    "example": null
+                },
+                "param": {
+                    "type": "string",
+                    "example": null
+                },
+                "location": {
+                    "type": "string",
+                    "example": null
+                }
+            }
+        }
+    }
+}
+

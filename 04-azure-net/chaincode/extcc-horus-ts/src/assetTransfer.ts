@@ -88,6 +88,7 @@ export class AssetTransferContract extends Contract {
     }
 
     // CreateUser issues a new user to the world state with given details.
+    // representativeEmail, representativeName, representativePassword, representativeRole, createdBy, createdAt, representativeOrganisation, params
     @Transaction()
     public async CreateUser(ctx: Context, representativeEmail: string, representativeName: string, representativePassword: string, representativeRole: string, createdBy: string, createdAt: string, representativeOrganisation: string, params: string): Promise<void> {
         console.info('=========== CreateUser Start ===========');
@@ -129,6 +130,7 @@ export class AssetTransferContract extends Contract {
 
 
     // UpdateUser updates an existing user in the world state with provided parameters.
+    // representativeEmail, lastLogin, representativeName, representativePassword, representativeRole, isActive, params
     @Transaction()
     public async UpdateUser(ctx: Context, representativeEmail: string, lastLogin: string, representativeName: string, representativePassword: string, representativeRole: string, isActive: string, params: string): Promise<void> {
 
