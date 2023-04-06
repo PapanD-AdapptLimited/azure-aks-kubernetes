@@ -28,7 +28,7 @@ spec:
             - name: DEBUG
               value: "true"
             - name: HOSTNAME
-              value: "localhost:3010"
+              value: "20.246.186.81:3010"
             - name: PORT
               value: "3010"
             - name: CCP_PATH
