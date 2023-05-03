@@ -1,0 +1,23 @@
+{
+  "name": "load-testing-using-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js --child_process=10 --url=/api/v1/hostname --method=get",
+    "dev": "nodemon index.js"
+  },
+  "author": "Tom Baranowicz",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.0.3",
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "nodemon": "^2.0.22"
+  }
+}

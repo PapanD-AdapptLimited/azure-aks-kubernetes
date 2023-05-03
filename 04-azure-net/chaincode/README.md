@@ -17,7 +17,7 @@ ls -la /opt/gopath/src/github.com/extcc-horus-ts-1/extcc-horus-ts/
 #
 
 export org=oracle
-export peer=peer1
+export peer=peer
 export cc_name=extcc-horus-ts-1
 # export cc_tag=1.0.2
 export cc_label=${cc_name}
@@ -184,3 +184,7 @@ kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer0-ibm-d
 kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer0-oracle-deployment | sed "s/^.\{4\}//") -- bash -c 'peer chaincode query -C mainchannel -n extcc-horus-ts-1 -c '\''{"Args":["GetAllAssets"]}'\'' -o orderer0-service:7050 --tls --cafile=/etc/hyperledger/orderers/msp/tlscacerts/orderers-ca-service-7054.pem'
 
 # kubectl -n $NS exec -it $(kubectl -n $NS get pods -o=name | grep cli-peer1-oracle-deployment | sed "s/^.\{4\}//") -- bash -c 'peer chaincode query -C mainchannel -n extcc-horus-ts-1 -c '\''{"Args":["GetAllAssets"]}'\'' -o orderer0-service:7050 --tls --cafile=/etc/hyperledger/orderers/msp/tlscacerts/orderers-ca-service-7054.pem'
+
+
+
+curl http://20.246.186.81:3010/api/v1/hostname | jq

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  namespace: ms-dev
+  labels:
+    app: auth-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: auth-deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: auth-deployment
+    spec:
+      containers:
+      - name: auth-deployment
+        image: hexoindia/ms-k8s-arm64-auth:latest
+        ports:
+          - containerPort: 5000
+        envFrom:
+          - configMapRef:
+              name: auth-configmap
+          - secretRef:
+              name: auth-secret
